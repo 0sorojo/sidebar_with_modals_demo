@@ -1,13 +1,15 @@
-import logo from './redRootSVGLOGO.svg';
+import React from 'react';
+import Modal from './Modal';
+import Sidebar from './Sidebar';
+import Home from './Home';
 
 function App() {
   return (
-    <div>
-      <header>
-        <img src={logo} alt='logo' />
-        <h1>I work</h1>
-      </header>
-    </div>
+    <>
+      <Home />
+      <Modal />
+      <Sidebar />
+    </>
   );
 }
 
