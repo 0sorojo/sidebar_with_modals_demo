@@ -1,17 +1,43 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaBars, FaTimes, FaTwitter } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import { links, social } from './data';
 import logo from './redRootSVGLOGO.svg';
+import { useGlobalContext } from './context';
 
 const Sidebar = () => {
+  const { isSidebarOpen, closeSidebar } = useGlobalContext();
+
   return (
-    <aside className={`sidebar show-sidebar`}>
+    <aside className={`${isSidebarOpen ? 'show-sidebar sidebar' : 'sidebar'}`}>
       <div className='sidebar-header'>
         <img src={logo} alt='logo' className='logo' />
+        <button className='close-btn' onClick={closeSidebar}>
+          <FaTimes />
+        </button>
       </div>
-      <button className='close-btn'>
-        <FaTimes />
-      </button>
+      <ul className='links'>
+        {links.map((link) => {
+          const { id, url, text, icon } = link;
+          return (
+            <li key={id}>
+              <a href={url}>
+                {icon}
+                {text}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <ul className='social-icons'>
+        {social.map((link) => {
+          const { id, url, icon } = link;
+          return (
+            <li key={id}>
+              <a href={url}>{icon}</a>
+            </li>
+          );
+        })}
+      </ul>
     </aside>
   );
 };
